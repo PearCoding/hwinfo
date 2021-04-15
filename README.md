@@ -1,4 +1,4 @@
-# Simple Hardware (CPU) Feature Extractor
+# Simple Hardware (CPU) Feature Extractor ![Build](https://github.com/PearCoding/hwinfo/actions/workflows/cmake.yml/badge.svg)
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/PearCoding/hwinfo/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/PearCoding/hwinfo.svg)](https://github.com/PearCoding/hwinfo/issues)
