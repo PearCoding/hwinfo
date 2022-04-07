@@ -3,7 +3,7 @@
 
 #if defined(__linux) || defined(linux)
 #define _OS_LINUX
-#if defined(__APPLE__)
+#elif defined(__APPLE__)
 #define _OS_APPLE
 #elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__) || defined(__TOS_WIN__)
 #define _OS_WINDOWS
