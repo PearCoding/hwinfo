@@ -3,6 +3,8 @@
 
 #if defined(__linux) || defined(linux)
 #define _OS_LINUX
+#if defined(__APPLE__)
+#define _OS_APPLE
 #elif defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__WINDOWS__) || defined(__TOS_WIN__)
 #define _OS_WINDOWS
 #else
@@ -106,6 +108,8 @@ inline CPUIDOut i_cpuid(uint32_t eax)
 				   "=d"(out.EDX)
 				 : "0"(eax));
 	return out;
+#elif defined _OS_APPLE
+	return CPUIDOut{0,0,0,0};
 #elif defined _OS_WINDOWS
 	int cpuinfo[4];
 	__cpuid(cpuinfo, eax);
@@ -124,6 +128,8 @@ inline CPUIDOut i_cpuid(uint32_t eax, uint32_t ecx)
 				   "=d"(out.EDX)
 				 : "0"(eax), "2"(ecx));
 	return out;
+#elif defined _OS_APPLE
+	return CPUIDOut{0,0,0,0};
 #elif defined _OS_WINDOWS
 	int cpuinfo[4];
 	__cpuidex(cpuinfo, eax, ecx);
@@ -200,9 +206,12 @@ static void printJSON(const ResultVector& features)
 static ResultVector detectFeatures()
 {
 	ResultVector features;
+#ifdef _OS_APPLE
+	std::fill(features.begin(), features.end(), false);
+#else
 	for (int i = 0; i < _CM_COUNT; ++i)
 		CheckFunctions[i](features);
-
+#endif
 	return features;
 }
 
